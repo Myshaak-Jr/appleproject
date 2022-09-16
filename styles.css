@@ -1,0 +1,10 @@
+.width70 {
+    width: 70%;
+    max-width: 70%;
+}
+
+.flex-container {
+    display: flex;
+    flex-flow: column nowrap;
+    align-content: center center;
+}
