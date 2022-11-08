@@ -66,6 +66,10 @@ ul.menu > li.button {
     transition: var(--time);
 }
 
+ul.menu > li.button:nth-child(1), ul.menu > li.button:nth-last-child(1) {
+    width: calc(var(--size) / 3);
+}
+
 ul.menu > li.button:hover {
     height: calc(var(--size) * 4);
     transition: var(--time);
