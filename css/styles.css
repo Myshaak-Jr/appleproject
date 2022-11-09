@@ -138,7 +138,7 @@ body {
     /* height: 100vh; */
     margin: 0px;
 
-    background-color: #1E1E1F;
+    background: fixed url("./images/background.jpg");
 }
 
 * {
