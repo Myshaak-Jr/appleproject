@@ -4,29 +4,45 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" type="text/css" href="css/styles.css">
+	<link rel="stylesheet" type="text/css" href="./css/styles.css">
+	<link rel="icon" type="image/x-icon" href="./images/favicon.ico">
+	<script type="text/javascript" src="./js/main.js"></script>
 	<title>Document</title>
 </head>
 <body>
-	<ul class="menu">
-		<li class="button"></li>
-		<li class="button" id="home">
-			<div class="icon">D</div>
-			<div class="full-name">Domů</div>
-		</li>
-		<li class="button" id="pages">
-			<div class="icon">S</div>
-			<div class="full-name">Stránky</div>
-		</li>
-		<li class="button" id="about">
-			<div class="icon">O</div>
-			<div class="full-name">O nás</div>
-		</li>
-		<li class="button" id="sources">
-			<div class="icon">Z</div>
-			<div class="full-name">Zdroje</div>
-		</li>
-		<li class="button"></li>
-	</ul>
+	<div id="container"> <!-- CSS' variables scope -->
+		<div id="menu-container">
+			<ul id="menu">
+				<li class="blank hiding"></li>
+				<li class="button hiding" id="home"><a href="#">
+					<div class="icon">D</div>
+					<div class="full-name">Domů</div>
+				</a></li>
+				<li class="button hiding" id="pages"><a href="#">
+					<div class="icon">S</div>
+					<div class="full-name">Stránky</div>
+				</a></li>
+				<li class="button hiding" id="about"><a href="#">
+					<div class="icon">O</div>
+					<div class="full-name">O nás</div>
+				</a></li>
+				<li class="button hiding" id="sources"><a href="#">
+					<div class="icon">Z</div>
+					<div class="full-name">Zdroje</div>
+				</a></li>
+				<li class="blank"></li>
+				<li class="toggle">
+					<div>
+						<div class="bar"></div>
+						<div class="bar"></div>
+						<div class="bar"></div>
+					</div>
+				</li>
+				<li class="blank"></li>
+			</ul>
+			<!-- Backgroud for the toggle button to hide sliding elements --> 
+			<div id="non-hiding-background"></div>
+		</div>
+	</div>
 </body>
 </html>

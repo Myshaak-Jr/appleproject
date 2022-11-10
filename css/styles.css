@@ -1,49 +1,109 @@
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
 
-:root {
-    --time: 0.5s;
-}
-
 /************************
  * MENU AND ITS BUTTONS *
  *                      *
  ************************/
-ul.menu {
+
+#menu-container {
+    --time: 0.5s;
+    --size: 50px;
+
+    --blank-size: calc(var(--size)/3);
+
+    --text-button-scale: 3.5;
+    --scale: calc(9/5);
+    --text-button-semi-scale: calc(9/5);
+    --semi-scale: calc(7/5);
+
+    --margin: calc(var(--size) * (1/7) / 2);
+}
+
+#menu {
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
     justify-content: center;
 
-    min-height: 220px;
+    position: absolute;
+
+    right: calc(4*var(--margin));
+    top: 0px;
+    margin: 0px;
+
+    height: calc(var(--text-button-scale)*var(--size) + 4*var(--margin));
     padding: 0px;
 }
 
-ul.menu > li.button:nth-child(1) {
+#non-hiding-background {
+    display: block;
+    position: absolute;
+
+    height: calc(var(--text-button-scale)*var(--size) + 4*var(--margin));
+    width: calc(4*var(--size) + var(--blank-size) + 10*var(--margin));
+    transform: translateX(calc(4*var(--size) + var(--blank-size) + 10*var(--margin) - (var(--size) + 2*var(--blank-size) + 5*var(--margin))));
+    right: calc(4*var(--margin));
+    top: 0px;
+
+    background-color: #1E1E1F;
+    box-shadow: 0px 0px 10px var(--margin) #1E1E1F;
+
+    z-index: 10;
+}
+
+#menu.shown {
+    display: flex;
+}
+
+#menu .toggle > div {
+    display: inline-block;
+    width: fit-content;
+    height: fit-content;
+}
+
+#menu .toggle div.bar {
+    width: 35px;
+    height: 5px;
+    background-color: #fff;
+    margin: 6px 0;
+    transition: 0.4s;
+}
+
+#menu.shown li.toggle div.bar:nth-child(1) {
+    transform: translate(0, 11px) rotate(-45deg);
+}
+
+#menu.shown li.toggle div.bar:nth-child(2) {
+    opacity: 0;
+}
+
+#menu.shown li.toggle div.bar:nth-child(3) {
+    transform: translate(0, -11px) rotate(45deg);
+}
+
+#menu li:nth-child(1) {
     --color: #3498db;
 }
-ul.menu > li.button:nth-child(2) {
+#menu li:nth-child(2) {
     --color: #358BDB;
 }
-ul.menu > li.button:nth-child(3) {
+#menu li:nth-child(3) {
     --color: #3582DB;
 }
-ul.menu > li.button:nth-child(4) {
+#menu li:nth-child(4) {
     --color: #357DDB;
 }
-ul.menu > li.button:nth-child(5) {
+#menu li:nth-child(5) {
     --color: #3575DB;
 }
-ul.menu > li.button:nth-child(6) {
+#menu li:nth-child(6), #menu li:nth-child(6) ~ li {
     --color: #3569DB;
 }
 
-ul.menu > li {
+#menu li {
+    display: inline-block;
     list-style-type: none;
     position: relative;
-}
-
-ul.menu > li.button {
-    --size: 50px;
 
     border: 3.5px solid white;
     border-radius: 3.5px;
@@ -53,7 +113,7 @@ ul.menu > li.button {
 
     width: var(--size);
     height: var(--size);
-    margin: calc(var(--size) / 10);
+    margin: var(--margin);
 
     /* display: flex;
     flex-flow: column nowrap;
@@ -63,34 +123,74 @@ ul.menu > li.button {
 
     overflow: hidden;
 
-    transition: var(--time);
+    transition: width var(--time), height var(--time);
 }
 
-ul.menu > li.button:nth-child(1), ul.menu > li.button:nth-last-child(1) {
-    width: calc(var(--size) / 3);
+#menu li.button, #menu li.toggle {
+    cursor: pointer;
 }
 
-ul.menu > li.button:hover {
-    height: calc(var(--size) * 4);
-    transition: var(--time);
+#menu li:not(.hiding) {
+    z-index: 15;
+}
+#menu li.toggle {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+}
+#menu li.button a {
+    text-decoration: none;
+    color: inherit;
 }
 
-ul.menu > li.button:hover:nth-child(1), ul.menu > li.button:hover:nth-last-child(1) {
-    height: calc(var(--size) * 3);
+/* hiding / showing elements */
+#menu li.hiding {
+    visibility: hidden;
+    transform: translateX(calc(4*var(--size) + var(--blank-size) + 10*var(--margin)));
+    z-index: 5;
+    
+    transition: transform var(--time), visibility 0s linear var(--time);
+}
+#menu.shown li.hiding {
+    visibility: visible;
+    transform: translateX(0);
+    z-index: 15;
+
+    transition: transform var(--time), height var(--time), z-index 0s linear var(--time);
 }
 
-ul.menu > li.button:hover + li.button, ul.menu > li.button:has(+ li.button:hover) {
-    height: calc(var(--size) * (7/5));
-    transition: var(--time);
+#menu li.blank {
+    width: var(--blank-size);
 }
 
-ul.menu > li.button > * {
+/* hover scaling */
+#menu li:hover {
+    transition: height var(--time);
+    height: calc(var(--scale)*var(--size));
+}
+#menu li.button:hover {
+    height: calc(var(--text-button-scale)*var(--size));
+}
+
+/* hover semi scaling */
+#menu li:hover + li, #menu li:has(+ li:hover) {
+    height: calc(var(--semi-scale)*var(--size));
+    transition: height var(--time);
+}
+#menu li.button:hover + li, #menu li:has(+ li.button:hover) {
+    height: calc(var(--text-button-semi-scale)*var(--size));
+    transition: height var(--time);
+}
+
+#menu li.button div {
     position: absolute;
     text-transform: uppercase;
     display: block;
 }
 
-ul.menu > li.button > .icon {
+#menu li.button .icon {
     opacity: 1;
     top: 50%;
     left: 50%;
@@ -98,23 +198,22 @@ ul.menu > li.button > .icon {
     transition: transform var(--time), top var(--time), opacity var(--time) linear 0s;
 }
 
-ul.menu > li.button:hover > .icon {
+#menu li.button:hover .icon {
     opacity: 0;
     top: 0%;
     transform: translateX(-50%) rotate(90deg);
     transition: transform var(--time), top var(--time), opacity var(--time) linear 0s;
 }
 
-ul.menu > li.button > .full-name {
+#menu li.button .full-name {
     opacity: 0;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%) rotate(90deg);
     transition: opacity calc(var(--time) / 2) ease 0s;
-
 }
 
-ul.menu > li.button:hover > .full-name {
+#menu li.button:hover .full-name {
     opacity: 1;
     transition: opacity calc(var(--time) / 2) ease calc(var(--time) / 2);
 }
@@ -123,6 +222,14 @@ ul.menu > li.button:hover > .full-name {
  *         BODY         *
  *                      *
  ************************/
+
+#container {
+    position: relative;
+
+    max-width: 800px;
+    width: 100%;
+}
+
 body {
     font-family: 'Ubuntu', sans-serif;
     font-size: 2em;
