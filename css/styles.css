@@ -1,11 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
 
 /************************
- * MENU AND ITS BUTTONS *
+ *        NAVBAR        *
  *                      *
  ************************/
-
-#menu-container {
+#navbar-container {
     --time: 0.5s;
     --size: 50px;
 
@@ -19,7 +18,7 @@
     --margin: calc(var(--size) * (1/7) / 2);
 }
 
-#menu {
+#navbar {
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
@@ -51,17 +50,17 @@
     z-index: 10;
 }
 
-#menu.shown {
+#navbar.shown {
     display: flex;
 }
 
-#menu .toggle > div {
+#navbar .toggle > div {
     display: inline-block;
     width: fit-content;
     height: fit-content;
 }
 
-#menu .toggle div.bar {
+#navbar .toggle div.bar {
     width: 35px;
     height: 5px;
     background-color: #fff;
@@ -69,38 +68,38 @@
     transition: 0.4s;
 }
 
-#menu.shown li.toggle div.bar:nth-child(1) {
+#navbar.shown li.toggle div.bar:nth-child(1) {
     transform: translate(0, 11px) rotate(-45deg);
 }
 
-#menu.shown li.toggle div.bar:nth-child(2) {
+#navbar.shown li.toggle div.bar:nth-child(2) {
     opacity: 0;
 }
 
-#menu.shown li.toggle div.bar:nth-child(3) {
+#navbar.shown li.toggle div.bar:nth-child(3) {
     transform: translate(0, -11px) rotate(45deg);
 }
 
-#menu li:nth-child(1) {
+#navbar li:nth-child(1) {
     --color: #3498db;
 }
-#menu li:nth-child(2) {
+#navbar li:nth-child(2) {
     --color: #358BDB;
 }
-#menu li:nth-child(3) {
+#navbar li:nth-child(3) {
     --color: #3582DB;
 }
-#menu li:nth-child(4) {
+#navbar li:nth-child(4) {
     --color: #357DDB;
 }
-#menu li:nth-child(5) {
+#navbar li:nth-child(5) {
     --color: #3575DB;
 }
-#menu li:nth-child(6), #menu li:nth-child(6) ~ li {
+#navbar li:nth-child(6), #navbar li:nth-child(6) ~ li {
     --color: #3569DB;
 }
 
-#menu li {
+#navbar li {
     display: inline-block;
     list-style-type: none;
     position: relative;
@@ -126,34 +125,34 @@
     transition: width var(--time), height var(--time);
 }
 
-#menu li.button, #menu li.toggle {
+#navbar li.button, #navbar li.toggle {
     cursor: pointer;
 }
 
-#menu li:not(.hiding) {
+#navbar li:not(.hiding) {
     z-index: 15;
 }
-#menu li.toggle {
+#navbar li.toggle {
     display: flex;
     flex-flow: column nowrap;
     align-items: center;
     align-content: center;
     justify-content: center;
 }
-#menu li.button a {
+#navbar li.button a {
     text-decoration: none;
     color: inherit;
 }
 
 /* hiding / showing elements */
-#menu li.hiding {
+#navbar li.hiding {
     visibility: hidden;
     transform: translateX(calc(4*var(--size) + var(--blank-size) + 10*var(--margin)));
     z-index: 5;
     
     transition: transform var(--time), visibility 0s linear var(--time);
 }
-#menu.shown li.hiding {
+#navbar.shown li.hiding {
     visibility: visible;
     transform: translateX(0);
     z-index: 15;
@@ -161,36 +160,36 @@
     transition: transform var(--time), height var(--time), z-index 0s linear var(--time);
 }
 
-#menu li.blank {
+#navbar li.blank {
     width: var(--blank-size);
 }
 
 /* hover scaling */
-#menu li:hover {
+#navbar li:hover {
     transition: height var(--time);
     height: calc(var(--scale)*var(--size));
 }
-#menu li.button:hover {
+#navbar li.button:hover {
     height: calc(var(--text-button-scale)*var(--size));
 }
 
 /* hover semi scaling */
-#menu li:hover + li, #menu li:has(+ li:hover) {
+#navbar li:hover + li, #navbar li:has(+ li:hover) {
     height: calc(var(--semi-scale)*var(--size));
     transition: height var(--time);
 }
-#menu li.button:hover + li, #menu li:has(+ li.button:hover) {
+#navbar li.button:hover + li, #navbar li:has(+ li.button:hover) {
     height: calc(var(--text-button-semi-scale)*var(--size));
     transition: height var(--time);
 }
 
-#menu li.button div {
+#navbar li.button div {
     position: absolute;
     text-transform: uppercase;
     display: block;
 }
 
-#menu li.button .icon {
+#navbar li.button .icon {
     opacity: 1;
     top: 50%;
     left: 50%;
@@ -198,14 +197,14 @@
     transition: transform var(--time), top var(--time), opacity var(--time) linear 0s;
 }
 
-#menu li.button:hover .icon {
+#navbar li.button:hover .icon {
     opacity: 0;
     top: 0%;
     transform: translateX(-50%) rotate(90deg);
     transition: transform var(--time), top var(--time), opacity var(--time) linear 0s;
 }
 
-#menu li.button .full-name {
+#navbar li.button .full-name {
     opacity: 0;
     top: 50%;
     left: 50%;
@@ -213,7 +212,7 @@
     transition: opacity calc(var(--time) / 2) ease 0s;
 }
 
-#menu li.button:hover .full-name {
+#navbar li.button:hover .full-name {
     opacity: 1;
     transition: opacity calc(var(--time) / 2) ease calc(var(--time) / 2);
 }
