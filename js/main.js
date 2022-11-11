@@ -1,9 +1,9 @@
 var onReady = function(){
 	var toggleShowMenuMenu = function(){
-		document.getElementById("menu").classList.toggle("shown");
+		document.getElementById("navbar").classList.toggle("shown");
 	}
 
-	for (const element of document.querySelectorAll("#menu li.toggle, #menu li.blank")) {
+	for (const element of document.querySelectorAll("#navbar li.toggle, #navbar li.blank")) {
 		element.addEventListener("click", toggleShowMenuMenu);
 	}
 
